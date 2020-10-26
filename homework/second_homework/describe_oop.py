@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
-# @Time     :2020/10/26 
+# @Time     :2020/10/26
 # @Author   :NicoleRW
 #@File      :describe_oop.py
+
 
 '''
 作业1
@@ -71,13 +72,17 @@ class Boy(Human):
 class Boyfriend(Boy):
     #类（男朋友）的静态变量，类变量
 
+    def __init__(self, name,Human):
+        super().__init__(name)
+        self.girl = Human.name
+
     # 男朋友的关心
     def care_for(self):
-        print("多喝热水")
+        return "多喝热水"
 
     # 男朋友过节
-    def double_eleven(self,girl):
-        print(f"双十一啦，我要给{girl}买买买！")
+    def double_eleven(self):
+        return f"双十一啦，我要给{self.girl}买买买！"
 
 class SingleDog(Boy):
 
@@ -90,30 +95,32 @@ class SelfIntroduction():
     def self_introduction(self,name,**kw):
         #介绍名字
         print(f"我的名字叫{name}。")
-        print(kw)
         #介绍我的其他信息
         for key in kw :
             print(f"我的{key}是{kw[key]}")
 
     def story_introduction(self,**kw):
         #介绍我经历的说的话
-        print(f"我{kw.keys()}的时候，说：{kw.values()}")
+        for key in kw :
+            print(f"我在{key}的时候，说：{kw[key]}")
+
+    def auto_introduction(self,Human):
+        self.self_introduction(Human.name, gender=Human.gender, type=Human.__class__)
+        self.story_introduction(double_eleven=Human.double_eleven())
 
 
 if __name__ == '__main__':
     # 实例化类
     # 实例化一个单身狗：小明
     Xiao_ming = SingleDog("小明")
-    # 实例化一个男朋友:落忍Ron
-    Ron_Weasley = Boyfriend("Ron_Weasley")
     # 实例化一个女孩：赫敏Hermione
     Hermione = Girl("Hermione")
+    # 实例化一个男朋友:罗恩Ron
+    Ron_Weasley = Boyfriend("Ron_Weasley",Hermione)
     # 实例化一次自我介绍：第一次见面
     first_meet = SelfIntroduction()
 
-    print(Xiao_ming.gender)
-    print(Xiao_ming.race)
-    print(Hermione.gender)
-    print(Hermione.race)
-    first_meet.self_introduction(Xiao_ming.name,gender = Xiao_ming.gender , type = Xiao_ming.__class__)
-    first_meet.story_introduction( Nov_11 = Xiao_ming.double_eleven())
+    #单身狗的自我介绍
+    first_meet.auto_introduction(Xiao_ming)
+    #男朋友的自我介绍
+    first_meet.auto_introduction(Ron_Weasley)
