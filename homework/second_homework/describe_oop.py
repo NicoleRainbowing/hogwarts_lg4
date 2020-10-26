@@ -3,7 +3,6 @@
 # @Author   :NicoleRW
 #@File      :describe_oop.py
 
-
 '''
 作业1
 用类和面向对象的思想，“描述”生活中任意接触到的东西
@@ -105,7 +104,7 @@ class SelfIntroduction():
             print(f"我在{key}的时候，说：{kw[key]}")
 
     def auto_introduction(self,Human):
-        self.self_introduction(Human.name, gender=Human.gender, type=Human.__class__)
+        self.self_introduction(Human.name, gender=Human.gender, type=Human.__class__.__name__)
         self.story_introduction(double_eleven=Human.double_eleven())
 
 
@@ -124,3 +123,4 @@ if __name__ == '__main__':
     first_meet.auto_introduction(Xiao_ming)
     #男朋友的自我介绍
     first_meet.auto_introduction(Ron_Weasley)
+
